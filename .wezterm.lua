@@ -7,6 +7,7 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
+config.default_cwd = "D:/git"
 config.default_prog = { 'pwsh.exe', '-NoLogo' }
 config.color_scheme = 'Tokyo Night'
 config.use_fancy_tab_bar = true
