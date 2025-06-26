@@ -1,6 +1,8 @@
 local wezterm = require 'wezterm'
+local session_manager = wezterm.plugin.require("https://github.com/abidibo/wezterm-sessions")
 local config = {}
 local act = wezterm.action
+local mux = wezterm.mux
 
 -- For better error messages:
 if wezterm.config_builder then
@@ -17,7 +19,7 @@ config.window_padding = {
   left = 2,
   right = 2,
   top = 2,
-  bottom = 0,
+  bottom = "0.3cell",
 }
 config.colors = {
   tab_bar = {
@@ -29,6 +31,10 @@ config.colors = {
 }
 config.switch_to_last_active_tab_when_closing_tab = true
 
+wezterm.on("save_session", function(window) session_manager.save_state(window) end)
+wezterm.on("load_session", function(window) session_manager.load_state(window) end)
+wezterm.on("restore_session", function(window) session_manager.restore_state(window) end)
+
 config.leader = {
   key = 'Space',
   mods = 'CTRL',
@@ -36,6 +42,11 @@ config.leader = {
 }
 
 config.keys = {
+  {
+    key = 't',
+    mods = 'LEADER',
+    action = act.SpawnTab 'CurrentPaneDomain',
+  },
   {
     key = ',',
     mods = 'LEADER',
@@ -128,6 +139,60 @@ config.keys = {
         end
       end
     end),
+  },
+  {
+    key = 'a',
+    mods = 'LEADER',
+    action = act.AttachDomain 'unix',
+  },
+  {
+    key = 'd',
+    mods = 'LEADER',
+    action = act.DetachDomain { DomainName = 'unix' },
+  },
+  {
+    key = 'r',
+    mods = 'LEADER',
+    action = act.PromptInputLine {
+      description = 'Enter new name for session',
+      action = wezterm.action_callback(
+        function(window, pane, line)
+          if line then
+            mux.rename_workspace(
+              window:mux_window():get_workspace(),
+              line
+            )
+          end
+        end
+      ),
+    },
+  },
+  {
+    key = 's',
+    mods = 'LEADER',
+    action = act.ShowLauncherArgs { flags = 'WORKSPACES' },
+  },
+  -- Session manager bindings
+  {
+    key = 's',
+    mods = 'LEADER|SHIFT',
+    action = act({ EmitEvent = "save_session" }),
+  },
+  {
+    key = 'L',
+    mods = 'LEADER|SHIFT',
+    action = act({ EmitEvent = "load_session" }),
+  },
+  {
+    key = 'R',
+    mods = 'LEADER|SHIFT',
+    action = act({ EmitEvent = "restore_session" }),
+  },
+}
+
+config.unix_domains = {
+  {
+    name = 'unix',
   },
 }
 
