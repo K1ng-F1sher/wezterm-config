@@ -13,6 +13,12 @@ config.color_scheme = 'Tokyo Night'
 config.use_fancy_tab_bar = true
 config.tab_bar_at_bottom = true
 config.tab_max_width = 32
+config.window_padding = {
+  left = 2,
+  right = 2,
+  top = 2,
+  bottom = 0,
+}
 config.colors = {
   tab_bar = {
     active_tab = {
