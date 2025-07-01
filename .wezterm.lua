@@ -42,6 +42,8 @@ config.leader = {
 }
 
 config.keys = {
+  -- TABS
+  -- Rename tab
   {
     key = ',',
     mods = 'LEADER',
@@ -61,7 +63,7 @@ config.keys = {
     },
   },
   {
-    key = 'w',
+    key = 't',
     mods = 'LEADER',
     action = act.ShowTabNavigator,
   },
@@ -122,6 +124,7 @@ config.keys = {
     mods = 'LEADER|SHIFT',
     action = act.PaneSelect { mode = 'SwapWithActiveKeepFocus' }
   },
+  -- Close all but the active pane in the current tab.
   {
     key = 'o',
     mods = 'LEADER',
@@ -135,16 +138,8 @@ config.keys = {
       end
     end),
   },
-  {
-    key = 'a',
-    mods = 'LEADER',
-    action = act.AttachDomain 'unix',
-  },
-  {
-    key = 'd',
-    mods = 'LEADER',
-    action = act.DetachDomain { DomainName = 'unix' },
-  },
+
+  -- WORKSPACES
   {
     key = 'r',
     mods = 'LEADER',
@@ -162,8 +157,7 @@ config.keys = {
       ),
     },
   },
-
-  -- Show the launcher in fuzzy selection mode and have it list all workspaces and allow activating one.
+  -- Fuzzy search workspaces or create a new one.
   {
     key = 's',
     mods = 'LEADER',
@@ -172,7 +166,17 @@ config.keys = {
     },
   },
 
-  -- Session manager bindings
+  -- SESSIONS
+  {
+    key = 'a',
+    mods = 'LEADER',
+    action = act.AttachDomain 'unix',
+  },
+  {
+    key = 'd',
+    mods = 'LEADER',
+    action = act.DetachDomain { DomainName = 'unix' },
+  },
   {
     key = 's',
     mods = 'LEADER|SHIFT',
