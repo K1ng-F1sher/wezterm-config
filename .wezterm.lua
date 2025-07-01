@@ -43,11 +43,6 @@ config.leader = {
 
 config.keys = {
   {
-    key = 't',
-    mods = 'LEADER',
-    action = act.SpawnTab 'CurrentPaneDomain',
-  },
-  {
     key = ',',
     mods = 'LEADER',
     action = act.PromptInputLine {
@@ -154,7 +149,7 @@ config.keys = {
     key = 'r',
     mods = 'LEADER',
     action = act.PromptInputLine {
-      description = 'Enter new name for session',
+      description = 'Enter name for the new workspace',
       action = wezterm.action_callback(
         function(window, pane, line)
           if line then
@@ -167,11 +162,16 @@ config.keys = {
       ),
     },
   },
+
+  -- Show the launcher in fuzzy selection mode and have it list all workspaces and allow activating one.
   {
     key = 's',
     mods = 'LEADER',
-    action = act.ShowLauncherArgs { flags = 'WORKSPACES' },
+    action = act.ShowLauncherArgs {
+      flags = 'FUZZY|WORKSPACES',
+    },
   },
+
   -- Session manager bindings
   {
     key = 's',
