@@ -1,10 +1,9 @@
 # To do
 
-- Shortkey for opening wezterm as admin.
 - Remap `<C-c>` to `<ESC>`.
+- Do I need the mux sessionizer? I seem to be able to reload sessions even without attaching to it.
 - Maybe later:
   - wezterm.resurrect [here](https://github.com/MLFlexer/resurrect.wezterm)
-  - wezterm workspace switcher [here](https://github.com/MLFlexer/smart_workspace_switcher.wezterm)
 
 # Done (in reverse chronological order)
 
