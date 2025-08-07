@@ -31,6 +31,10 @@ config.colors = {
 }
 config.switch_to_last_active_tab_when_closing_tab = true
 
+wezterm.on('format-window-title', function()
+  return 'Wezterm [ ' .. wezterm.mux.get_active_workspace() .. ' ]'
+end)
+
 wezterm.on("save_session", function(window) session_manager.save_state(window) end)
 wezterm.on("load_session", function(window) session_manager.load_state(window) end)
 wezterm.on("restore_session", function(window) session_manager.restore_state(window) end)
@@ -144,7 +148,11 @@ config.keys = {
     key = 'r',
     mods = 'LEADER',
     action = act.PromptInputLine {
-      description = 'Enter name for the new workspace',
+      description = wezterm.format {
+        { Attribute = { Intensity = 'Bold' } },
+        { Foreground = { AnsiColor = 'Fuchsia' } },
+        { Text = 'Enter new name for the current workspace (' .. wezterm.mux.get_active_workspace() .. ')' },
+      },
       action = wezterm.action_callback(
         function(window, pane, line)
           if line then
@@ -155,6 +163,30 @@ config.keys = {
           end
         end
       ),
+    },
+  },
+  {
+    key = 'n',
+    mods = 'ALT',
+    action = act.PromptInputLine {
+      description = wezterm.format {
+        { Attribute = { Intensity = 'Bold' } },
+        { Foreground = { AnsiColor = 'Fuchsia' } },
+        { Text = 'Enter name for new workspace' },
+      },
+      action = wezterm.action_callback(function(window, pane, line)
+        -- line will be `nil` if they hit escape without entering anything
+        -- An empty string if they just hit enter
+        -- Or the actual line of text they wrote
+        if line then
+          window:perform_action(
+            act.SwitchToWorkspace {
+              name = line,
+            },
+            pane
+          )
+        end
+      end),
     },
   },
   -- Fuzzy search workspaces or create a new one.
@@ -179,18 +211,28 @@ config.keys = {
   },
   {
     key = 's',
-    mods = 'LEADER|SHIFT',
+    mods = 'ALT',
     action = act({ EmitEvent = "save_session" }),
   },
   {
-    key = 'L',
-    mods = 'LEADER|SHIFT',
+    key = 'l',
+    mods = 'ALT',
     action = act({ EmitEvent = "load_session" }),
   },
   {
-    key = 'R',
-    mods = 'LEADER|SHIFT',
+    key = 'r',
+    mods = 'ALT',
     action = act({ EmitEvent = "restore_session" }),
+  },
+  {
+    key = 'D',
+    mods = 'CTRL|SHIFT',
+    action = act({ EmitEvent = "delete_session" }),
+  },
+  {
+    key = 'e',
+    mods = 'CTRL|SHIFT',
+    action = act({ EmitEvent = "edit_session" }),
   },
 }
 
