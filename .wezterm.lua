@@ -145,28 +145,7 @@ config.keys = {
 
   -- WORKSPACES
   {
-    key = 'r',
-    mods = 'LEADER',
-    action = act.PromptInputLine {
-      description = wezterm.format {
-        { Attribute = { Intensity = 'Bold' } },
-        { Foreground = { AnsiColor = 'Fuchsia' } },
-        { Text = 'Enter new name for the current workspace (' .. wezterm.mux.get_active_workspace() .. ')' },
-      },
-      action = wezterm.action_callback(
-        function(window, pane, line)
-          if line then
-            mux.rename_workspace(
-              window:mux_window():get_workspace(),
-              line
-            )
-          end
-        end
-      ),
-    },
-  },
-  {
-    key = 'n',
+    key = 'n', -- New workspace
     mods = 'ALT',
     action = act.PromptInputLine {
       description = wezterm.format {
@@ -187,6 +166,27 @@ config.keys = {
           )
         end
       end),
+    },
+  },
+  {
+    key = 'e', -- edit workspace name
+    mods = 'ALT',
+    action = act.PromptInputLine {
+      description = wezterm.format {
+        { Attribute = { Intensity = 'Bold' } },
+        { Foreground = { AnsiColor = 'Fuchsia' } },
+        { Text = 'Enter new name for the current workspace (' .. wezterm.mux.get_active_workspace() .. ')' },
+      },
+      action = wezterm.action_callback(
+        function(window, pane, line)
+          if line then
+            mux.rename_workspace(
+              window:mux_window():get_workspace(),
+              line
+            )
+          end
+        end
+      ),
     },
   },
   -- Fuzzy search workspaces or create a new one.
@@ -225,14 +225,34 @@ config.keys = {
     action = act({ EmitEvent = "restore_session" }),
   },
   {
-    key = 'D',
-    mods = 'CTRL|SHIFT',
+    key = 'd',
+    mods = 'ALT',
     action = act({ EmitEvent = "delete_session" }),
   },
   {
-    key = 'e',
+    key = 'j',
     mods = 'CTRL|SHIFT',
-    action = act({ EmitEvent = "edit_session" }),
+    action = wezterm.action.ActivateTab(0),
+  },
+  {
+    key = 'k',
+    mods = 'CTRL|SHIFT',
+    action = wezterm.action.ActivateTab(1),
+  },
+  {
+    key = 'l',
+    mods = 'CTRL|SHIFT',
+    action = wezterm.action.ActivateTab(2),
+  },
+  {
+    key = 'm',
+    mods = 'CTRL|SHIFT',
+    action = wezterm.action.ActivateTab(3),
+  },
+  {
+    key = 'n',
+    mods = 'CTRL|SHIFT',
+    action = wezterm.action.ActivateTab(4),
   },
 }
 
@@ -244,6 +264,7 @@ for i = 1, 8 do
     action = wezterm.action.MoveTab(i - 1),
   })
 end
+
 
 config.unix_domains = {
   {
