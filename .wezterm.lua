@@ -9,6 +9,13 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
+wezterm.log_error('Home ' .. wezterm.home_dir)
+config.background = {
+  {
+    source = { File = wezterm.home_dir .. "/.wezterm/treebackground.png" },
+    hsb = { brightness = 0.01 }
+  }
+}
 config.default_cwd = "D:/git"
 config.default_prog = { 'pwsh.exe', '-NoLogo' }
 config.color_scheme = 'Tokyo Night'
