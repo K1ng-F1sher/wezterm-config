@@ -12,8 +12,8 @@ end
 wezterm.log_error('Home ' .. wezterm.home_dir)
 config.background = {
   {
-    source = { File = wezterm.home_dir .. "/.wezterm/treebackground.png" },
-    hsb = { brightness = 0.01 }
+    source = { File = wezterm.home_dir .. "/.wezterm/lava-blossom.jpg" },
+    hsb = { brightness = 0.03 }
   }
 }
 config.default_cwd = "D:/git"
@@ -39,7 +39,7 @@ config.colors = {
 config.switch_to_last_active_tab_when_closing_tab = true
 
 wezterm.on('format-window-title', function()
-  return 'Wezterm [ ' .. wezterm.mux.get_active_workspace() .. ' ]'
+  return 'Wezterm -[ ' .. wezterm.mux.get_active_workspace() .. ' ]-'
 end)
 
 wezterm.on("save_session", function(window) session_manager.save_state(window) end)
