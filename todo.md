@@ -1,6 +1,7 @@
 # To do
 
 - Can Wezterm really restore sessions on Windows? As it's now, I only get the tabs and panes with a suggestion for processes to run per pane.
+- Better distinguishment between active and non active panes.
 
 # Done (in reverse chronological order)
 
