@@ -1,5 +1,7 @@
+---@type Wezterm
 local wezterm = require 'wezterm'
 local session_manager = wezterm.plugin.require("https://github.com/abidibo/wezterm-sessions")
+---@type Config
 local config = {}
 local act = wezterm.action
 local mux = wezterm.mux
