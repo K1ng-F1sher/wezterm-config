@@ -114,28 +114,34 @@ config.keys = {
   },
   {
     key = 'h',
-    mods = 'LEADER',
+    mods = 'ALT',
     action = act.ActivatePaneDirection 'Left',
   },
   {
     key = 'l',
-    mods = 'LEADER',
+    mods = 'ALT',
     action = act.ActivatePaneDirection 'Right',
   },
   {
     key = 'k',
-    mods = 'LEADER',
+    mods = 'ALT',
     action = act.ActivatePaneDirection 'Up',
   },
   {
     key = 'j',
-    mods = 'LEADER',
+    mods = 'ALT',
     action = act.ActivatePaneDirection 'Down',
   },
   {
     key = '{',
     mods = 'LEADER|SHIFT',
     action = act.PaneSelect { mode = 'SwapWithActiveKeepFocus' }
+  },
+  -- Switch to another pane using a selector
+  {
+    key = 'p',
+    mods = 'ALT',
+    action = wezterm.action { PaneSelect = { alphabet = 'jkl;asdfgh' } }
   },
   -- Close all but the active pane in the current tab.
   {
@@ -225,7 +231,7 @@ config.keys = {
   },
   {
     key = 'l',
-    mods = 'ALT',
+    mods = 'LEADER',
     action = act({ EmitEvent = "load_session" }),
   },
   {
