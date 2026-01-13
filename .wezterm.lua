@@ -114,22 +114,22 @@ config.keys = {
   },
   {
     key = 'h',
-    mods = 'ALT',
+    mods = 'ALT|SHIFT',
     action = act.ActivatePaneDirection 'Left',
   },
   {
     key = 'l',
-    mods = 'ALT',
+    mods = 'ALT|SHIFT',
     action = act.ActivatePaneDirection 'Right',
   },
   {
     key = 'k',
-    mods = 'ALT',
+    mods = 'ALT|SHIFT',
     action = act.ActivatePaneDirection 'Up',
   },
   {
     key = 'j',
-    mods = 'ALT',
+    mods = 'ALT|SHIFT',
     action = act.ActivatePaneDirection 'Down',
   },
   {
