@@ -21,6 +21,7 @@ config.background = {
 config.default_cwd = "D:/git"
 config.default_prog = { 'pwsh.exe', '-NoLogo' }
 config.color_scheme = 'Tokyo Night'
+config.font_size = 11.0
 config.use_fancy_tab_bar = true
 config.tab_bar_at_bottom = true
 config.tab_max_width = 32
