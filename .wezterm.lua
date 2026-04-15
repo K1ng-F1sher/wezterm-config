@@ -18,6 +18,10 @@ config.background = {
     hsb = { brightness = 0.03 }
   }
 }
+config.inactive_pane_hsb = {
+  saturation = 0.7,
+  brightness = 0.3
+}
 config.default_cwd = "D:/git"
 config.default_prog = { 'pwsh.exe', '-NoLogo' }
 config.color_scheme = 'Tokyo Night'
