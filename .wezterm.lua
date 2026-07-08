@@ -236,7 +236,7 @@ config.keys = {
   },
   {
     key = 'l',
-    mods = 'LEADER',
+    mods = 'ALT',
     action = act({ EmitEvent = "load_session" }),
   },
   {
